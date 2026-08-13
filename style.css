@@ -1,0 +1,339 @@
+html, body {
+    margin: 0;      
+    height: 100%;   
+    overflow: hidden;
+}
+.cont{
+    display: flex;
+    justify-content: center;      
+    align-items: center;     
+    width: auto; 
+    height: auto; 
+    position: sticky; 
+}
+.eve-title{
+    position: absolute;
+    left: 120px;
+}
+.add-eve{
+    position: absolute;
+    right: 55px;
+    border-radius: 8px;
+    width: 75px;
+    height: 30px;
+    border: none;
+    background-color: #4CAF50;
+}
+.add-eve:hover{
+    background-color: #45a049;
+    cursor: pointer;
+}
+.container {
+  display: grid;
+  position: relative;
+  grid-template-areas:
+    "header header"
+    "menu content";
+  grid-template-columns: 1fr 10fr;
+  gap: 3px;
+  background-color: whitesmoke;
+  color: black;
+}
+.container div , .container nav{
+  padding: 5px;
+  margin-top: 10px;
+}
+.container div.contents{
+  background-color: white !important;
+  margin: 0px !important;
+}
+.container div.header {
+  margin-top: 10px;
+  grid-area: header;
+  height: 25px;
+  margin-bottom: 10px;
+  position: sticky;
+  top: 0;
+}
+.container div.menu {
+  grid-area: menu;
+  position: sticky;
+  top: 0;
+}
+.container div.content {
+  grid-area: content;
+}
+nav li{
+    margin-top: 100px;
+    list-style-type: none;
+    padding: 20px;
+}
+nav li a{
+    padding: 15px;
+}
+nav ul{
+    padding: 0px;
+}
+nav.menu{
+   height: 100vh;  
+}
+.form-body{
+  display: grid;
+  position: relative;
+  grid-template-areas:
+    "Name text"
+    "desc textar"
+    "date textda"
+    "action-btns action-btns" ;
+  grid-template-columns: 5fr 10fr;
+  gap: 3px;
+  background-color: white;
+  color: black;
+}
+.form-body div {
+  background-color: white;
+  padding: 10px;
+}
+.form-body div.Name {
+  grid-area: Name;
+  text-align: center;
+}
+.form-body div.text {
+  grid-area: text;
+  text-align: center;
+}
+.form-body div.desc {
+  grid-area: desc;
+  text-align: center;  
+}
+.form-body div.textar {
+  grid-area: textar;
+  text-align: center;  
+}
+.form-body div.date {
+  grid-area: date;
+  text-align: center;  
+}
+.form-body div.textda {
+  grid-area: textda;
+  text-align: center;  
+}
+.form-body div.action-btns {
+  grid-area: action-btns;
+}
+textarea {
+    width: 70%;       
+    height: 250px;
+    padding: 10px;     
+    font-size: 16px;  
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;  
+}
+#name{
+    width: 70%;
+    padding: 15px;
+    font-size: 16px; 
+    border: 1px solid #ccc;
+    border-radius: 5px; 
+}
+#date{
+    width: 70%;
+    padding: 15px;
+    font-size: 16px; 
+    border: 1px solid #ccc;
+    border-radius: 5px; 
+}
+.action-btns{
+    position: relative;
+    width: 99%;
+}
+.action-btns #cancel-btn{
+    position: absolute;
+    left:50px;
+    text-decoration: none;
+    padding: 10px;
+    width: 60px;
+    font-size: large;
+}
+.action-btns #cancel-btn:hover{
+    text-decoration-line: underline;
+}
+.action-btns #save-add-btn{
+    position: absolute;
+    right:125px;
+    border-radius: 8px;
+    padding: 10px;
+    width: 100px;
+    border: none;
+    background-color: #4CAF50;
+}
+.action-btns #save-add-btn:hover{
+    cursor: pointer;
+    background: #45a049;
+}
+.logo {
+    width: 50px; 
+    height: auto; 
+    position: absolute;
+    left: 30px;
+    margin-top: 10px;
+}
+.action-btns #save-add-btn:disabled:hover{
+  cursor:default;
+  background-color: #4CAF50;
+}
+.action-btns #delete-btn{
+    position: absolute;
+    right:230px;
+    border-radius: 8px;
+    padding: 10px;
+    width: 100px;
+    border: none;
+    background-color: red;
+    display: none;
+}
+.action-btns #delete-btn.show{
+  display: block;
+}
+.action-btns #delete-btn.show:hover{
+    cursor: pointer;
+    background: #E60000;
+}
+.grid-container{
+  height: 93vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.grid{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+  padding: 20px;
+}
+.card{
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgb(0, 0, 0,0.1);
+  text-align: center;
+  box-shadow: 0px 8px 0px white;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.card:hover{
+  cursor: pointer;
+  transform: translateY(4px);
+  box-shadow: 0px 4px 0px white;
+}
+.card.past{
+  background-color:Red;
+}
+.card.today{
+  background-color:blue;
+}
+.card.future{
+  background-color:purple;
+}
+.Empty-List{
+  width: 60%;    
+  margin: 0 auto;
+  box-shadow: 0 4px 10px rgb(0, 0, 0,0.1);
+  border-radius: 12px;
+  text-align: center;
+  display: none;
+}
+.Empty-List.show{
+  display: block;
+}
+.Clear-LocalStorge{
+    position: absolute;
+    right: 140px;
+    border-radius: 8px;
+    width: 75px;
+    height: 30px;
+    border: none;
+    background-color: red;
+}
+.Clear-LocalStorge:hover{
+    cursor: pointer;
+    background-color: #E60000;
+}
+.filterBtn{
+  height:35px;
+  width: 35px;
+  position: absolute;
+  right: 10px;
+  background-color: inherit;
+  padding: 0;
+  border: none;
+}
+.filterBtn:hover{
+  cursor: pointer;
+  opacity: 0.6;
+}
+.filterBtn img{
+  height:30px;
+  width: 30px;
+  vertical-align:middle;
+}
+#FormBtn.disabled{
+  pointer-events: none;
+  cursor: default;
+  font-size: 20px;
+  text-decoration: none;
+  color: blue;
+}
+#ListBtn.disabled{
+  pointer-events: none;
+  cursor: default;
+  font-size: 20px;
+  text-decoration: none;
+  color: blue;
+}
+.dropList{
+  position: absolute;
+  top: 120%;
+  right: 0;
+  z-index: 1000;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  display: none;
+}
+.dropList.show{
+  display: block;
+}
+#confirmFilter{
+  padding: 10px;
+  border-radius: 12px;
+  text-align: center;
+  background-color: #45a049;
+  border: none;
+  width: 48%;
+}
+#confirmFilter:hover{
+  cursor: pointer;
+  background-color: #4CAF50;
+}
+#clearFilter{
+  padding: 10px;
+  border-radius: 12px;
+  text-align: center;
+  background-color: red;
+  border: none;
+  width: 48%;
+}
+#clearFilter:hover{
+  cursor: pointer;
+  background-color: #E60000;
+}
+.button {
+  font-size: 20px;
+  text-decoration: none;
+  background-color: inherit;
+  color: black;
+  margin: 0px;
+  border: none;
+}
+.button:hover {
+ color: grey;
+}
