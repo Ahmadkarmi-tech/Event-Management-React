@@ -183,7 +183,7 @@ textarea {
   cursor:default;
   background-color: #4CAF50;
 }
-.action-btns #delete-btn{
+.action-btns .delete-btn{
     position: absolute;
     right:230px;
     border-radius: 8px;
@@ -193,37 +193,42 @@ textarea {
     background-color: red;
     display: none;
 }
-.action-btns #delete-btn.show{
+.action-btns .delete-btn.show{
   display: block;
 }
-.action-btns #delete-btn.show:hover{
+.action-btns .delete-btn.show:hover{
     cursor: pointer;
     background: #E60000;
 }
-.grid-container{
+.grid-container {
   height: 93vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
-.grid{
+
+.grid {
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   padding: 20px;
+  margin: 0;
+  list-style: none;
 }
-.card{
+
+.card {
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 4px 10px rgb(0, 0, 0,0.1);
-  text-align: center;
   box-shadow: 0px 8px 0px white;
+  text-align: center;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
-.card:hover{
+
+.card:hover {
   cursor: pointer;
   transform: translateY(4px);
   box-shadow: 0px 4px 0px white;
 }
+
 .card.past{
   background-color:Red;
 }

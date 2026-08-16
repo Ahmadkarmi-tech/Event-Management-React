@@ -1,30 +1,56 @@
 import Nav from "./Nav";
 import Header from "./Header";
-import { useRef,useState } from "react";
+import { useRef,useState, useEffect} from "react";
 import { Link } from "react-router";
-const data = [];
-let ID = 1;
-function FormPage(){
+function FormPage({ events, setEvents, eventData, setEventData }){
 
     const submitButton = useRef(null);
-
+    const deleteButton = useRef(null);
 
     const [formData , setFormData] = useState({
-        id: ID,
+        id: 0,
         name:"",
         description:"",
         date:""
     })
 
+    function getTheNextId() {
+        if (events.length === 0) {
+            return 1;
+        }
+
+        return events[events.length - 1].id + 1;
+    }
+    
+    useEffect(() => {
+        if (eventData.id != 0) {
+            setFormData({
+                id: eventData.id,
+                name: eventData.name,
+                description: eventData.description,
+                date: eventData.date
+            });
+            submitButton.current.textContent = "Save";
+        }
+    }, [eventData]);
+
 
     const handelChange = (e) => {
         const { name, value } = e.target;
+        if(name === "name"){
+            submitButton.current.textContent = "Add";
+            deleteButton.current.className = "delete-btn";
+        }
         setFormData((prev) => ({
             ...prev,
             [name]:value
         }));
     };
 
+    const handelDelete = (e) => {
+        changArray("Delete");
+        deleteButton.current.className = "delete-btn";
+    }
 
     const isFormComplete = formData.name && formData.description && formData.date;
 
@@ -54,12 +80,11 @@ function FormPage(){
         return;
     }
         changArray("Add");
-        console.log("Form submitted:", data);
     };
 
 
     function isTitleExist(){
-        if(data.some(someEvent => someEvent.name.toUpperCase() === formData.name.trim().toUpperCase())){
+        if(events.some(someEvent => someEvent.name.toUpperCase() === formData.name.trim().toUpperCase())){
             return true;
         }else{
             return false;
@@ -68,25 +93,67 @@ function FormPage(){
 
 
     function changArray(operation){
-        if(operation === "Add"){
-            ID++;
-            data.push(formData);
-            localStorage.setItem("eventsData", JSON.stringify(data));
-            alert("The event have been added successfully!");
+        if (operation === "Add") {
+
+            const newID = getTheNextId();
+
+            const newEvent = {
+                ...formData,
+                id: newID
+            };
+
+            const updatedEvents = [...events, newEvent];
+
+            setEvents(updatedEvents);
+
+            localStorage.setItem(
+                "eventsData",
+                JSON.stringify(updatedEvents)
+            );
+
+            alert("The event has been added successfully!");
         }
-        else if(operation === "Update"){
-            listOfEvents[+ID - 1] = new Event(ID,title,descriptionVlaue,dateValue);
-            formButon.textContent = "Add";
-            localStorage.setItem("eventsData", JSON.stringify(listOfEvents));
-            alert("The event have been updated successfully!");
+
+        else if (operation === "Update") {
+
+            const newEvent = {
+                ...formData,
+                id: eventData.id
+            };
+
+            const updatedEvents = events.map(event =>
+                event.id === eventData.id
+                    ? newEvent
+                    : event
+            );
+
+            setEvents(updatedEvents);
+
+            localStorage.setItem(
+                "eventsData",
+                JSON.stringify(updatedEvents)
+            );
+
+            alert("The event has been updated successfully!");
         }
-        else if (operation === "Delete"){
-            console.log(ID);
-            listOfEvents.splice((+ID - 1), 1);
-            localStorage.setItem("eventsData", JSON.stringify(listOfEvents));
-            alert("The event have been deleted successfully!");
-        }
-        setFormData({ id: ID ,name: "" , description:"" , date: ""});
+            else if (operation === "Delete") {
+
+                const updatedEvents = events.filter(
+                    event => event.id !== eventData.id
+                );
+
+                setEvents(updatedEvents);
+
+                localStorage.setItem(
+                    "eventsData",
+                    JSON.stringify(updatedEvents)
+                );
+
+                alert("The event has been deleted successfully!");
+            }
+        submitButton.current.textContent = "Add";
+        deleteButton.current.className = "delete-btn";
+        setFormData({ id: 0 ,name: "" , description:"" , date: ""});
     }
 
     
@@ -123,7 +190,7 @@ function FormPage(){
                         </div>
                         <div className="action-btns">
                             <Link id="cancel-btn" to="/">Cancel</Link>
-                            <button id="delete-btn">Delete</button>
+                            <button type = "button" id="delete-btn" ref={deleteButton} onClick={handelDelete} className={`delete-btn ${eventData.id != 0 ? "show" : ""}`}>Delete</button>
                             <button type="submit" id="save-add-btn" disabled={!isFormComplete} ref={submitButton}>Add</button>
                         </div>
                     </form>
